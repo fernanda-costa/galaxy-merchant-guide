@@ -1,0 +1,90 @@
+# Build results
+
+bin/
+obj/
+out/
+
+# Visual Studio
+
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+
+.idea/
+
+# VS Code
+
+.vscode/
+
+# Logs
+
+*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Environment variables
+
+.env
+
+# NuGet
+
+*.nupkg
+packages/
+.nuget/
+
+# Test results
+
+TestResults/
+*.trx
+
+# Coverage
+
+coverage/
+*.coverage
+*.coveragexml
+
+# Publish output
+
+publish/
+
+# Azure
+
+*.azurePubxml
+
+# Resharper
+
+_ReSharper*/
+*.DotSettings.user
+
+# Dotnet tools
+
+.dotnet/
+
+# Entity Framework
+
+*.db
+*.sqlite
+
+# Secrets
+
+secrets.json
+appsettings.Development.json
+
+# Node (caso tenha frontend junto)
+
+node_modules/
+
+# Docker
+
+docker-compose.override.yml
+
+# Mac
+
+*.swp
