@@ -76,7 +76,7 @@ namespace Localiza.MerchantGuide.Application
                 }
                 catch (Exception ex)
                 {
-                    _console.WriteLine($"Não tenho a menor ideia do que você está falando.. mas posso começar a investigar por aqui: {ex.Message}");
+                    _console.WriteLine($"\nErro: {ex.Message}");
                 }
 
             } while (option != (int)MenuOptionsEnum.Leave);
@@ -125,7 +125,7 @@ namespace Localiza.MerchantGuide.Application
 
         private void AnswerQuestion()
         {
-            _console.WriteLine("\nAgora vamos descobrir os valores e quantidade! \nInforme a transação no formato: quanto é <medidas> <material> em créditos? ou quanto é <medidas>?");
+            _console.WriteLine("\nAgora vamos descobrir os valores e quantidade! \nInforme a transação no formato: quanto é <medidas> <material> créditos? ou quanto é <medidas>?");
             var input = _inputService.ReadInput("Digite sua pergunta sobre quantidade e valores:");
 
             var words = ExtractQuery(input);
