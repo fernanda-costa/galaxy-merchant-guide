@@ -10,7 +10,7 @@ namespace Localiza.MerchantGuide.Application
         private const string ExitCommand = "SAIR";
 
         private static readonly HashSet<string> IgnoredWords =
-            ["quanto", "é", "custa", "vale"];
+            ["quanto", "quantos", "creditos", "créditos", "é", "custa", "vale"];
 
         private readonly IConsole _console;
         private readonly InputService _inputService;
@@ -35,6 +35,18 @@ namespace Localiza.MerchantGuide.Application
         public void Run()
         {
             int option = -1;
+
+            _console.WriteLine("\n--- Bem vindo ao seu conversor de unidades intergalácticas! ---");
+            Console.WriteLine(@"
+                    /\
+                   /  \
+                  |----|
+                  |    |
+                 /| || |\
+                /_|_||_|_\
+                   /||\
+                  /_||_\
+            ");
 
             do
             {
@@ -64,7 +76,7 @@ namespace Localiza.MerchantGuide.Application
                 }
                 catch (Exception ex)
                 {
-                    _console.WriteLine($"Erro: {ex.Message}");
+                    _console.WriteLine($"Não tenho a menor ideia do que você está falando.. mas posso começar a investigar por aqui: {ex.Message}");
                 }
 
             } while (option != (int)MenuOptionsEnum.Leave);
@@ -72,7 +84,7 @@ namespace Localiza.MerchantGuide.Application
 
         private void ShowMenu()
         {
-            _console.WriteLine("\n--- Conversor Intergaláctico ---");
+
             _console.WriteLine("1 - Mapear numerais");
             _console.WriteLine("2 - Inserir materiais");
             _console.WriteLine("3 - Fazer pergunta");
@@ -90,10 +102,11 @@ namespace Localiza.MerchantGuide.Application
         private void ReadMaterials()
         {
             string input;
+            _console.WriteLine("Vamos identificar os valores dos materiais! \nInforme a transação no formato: <medidas> <material> é <valor> créditos\nExemplo: glob glob prata é 34 créditos");
 
             do
             {
-                input = _inputService.ReadInput("Transação (ou SAIR):");
+                input = _inputService.ReadInput("Digite sua transação aqui (ou SAIR para voltar ao menu):");
 
                 if (input == ExitCommand)
                     break;
@@ -112,7 +125,8 @@ namespace Localiza.MerchantGuide.Application
 
         private void AnswerQuestion()
         {
-            var input = _inputService.ReadInput("Pergunta:");
+            _console.WriteLine("\nAgora vamos descobrir os valores e quantidade! \nInforme a transação no formato: quanto é <medidas> <material> em créditos? ou quanto é <medidas>?");
+            var input = _inputService.ReadInput("Digite sua pergunta sobre quantidade e valores:");
 
             var words = ExtractQuery(input);
 
@@ -137,7 +151,7 @@ namespace Localiza.MerchantGuide.Application
             var words = GetWords(input);
 
             var relevantWords = words
-                .Where(w => !IgnoredWords.Contains(w))
+                .Where(w => !IgnoredWords.Contains(w.ToLower()))
                 .ToList();
 
             if (relevantWords.Count == 0)

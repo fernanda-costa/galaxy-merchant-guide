@@ -29,32 +29,44 @@ namespace Localiza.MerchantGuide.Domain.Services
         public decimal Calculate(List<string> values)
         {
             decimal result = 0;
+            decimal lastAddedValue = decimal.MaxValue;
             int repeatCount = 1;
 
             for (int i = 0; i < values.Count; i++)
             {
-                var current = GetRoman(values[i]);
-                var currentValue = GetValue(current);
+                var currentRoman = GetRoman(values[i]);
+                var currentValue = GetValue(currentRoman);
 
-                var next = HasNext(values, i) ? GetRoman(values[i + 1]) : null;
-                var nextValue = next != null ? GetValue(next) : 0;
+                var nextRoman = HasNext(values, i) ? GetRoman(values[i + 1]) : null;
+                var nextValue = nextRoman != null ? GetValue(nextRoman) : 0;
 
-                bool mustSubtract = next != null && currentValue < nextValue;
+                var mustSubstract = nextRoman != null && currentValue < nextValue;
 
-                if (mustSubtract)
+                if (mustSubstract)
                 {
-                    ValidateSubtraction(current, next, repeatCount);
+                    ValidateSubtraction(currentRoman, nextRoman, repeatCount);
 
-                    result += nextValue - currentValue;
+                    var subtractionValue = nextValue - currentValue;
+
+                    if (subtractionValue > lastAddedValue)
+                        throw new InvalidOperationException("Ordem romana inválida");
+
+                    result += subtractionValue;
+                    lastAddedValue = subtractionValue;
+
                     i++;
-                    repeatCount += 1;
+                    repeatCount = 1;
                     continue;
                 }
 
-                repeatCount = UpdateRepeatCount(values, i, current, repeatCount);
-                ValidateRepetition(current, repeatCount, mustSubtract);
+                repeatCount = UpdateRepeatCount(values, i, repeatCount);
+                ValidateRepetition(currentRoman, repeatCount, mustSubstract);
+
+                if (currentValue > lastAddedValue)
+                    throw new InvalidOperationException("Ordem romana inválida");
 
                 result += currentValue;
+                lastAddedValue = currentValue;
             }
 
             return result;
@@ -78,7 +90,7 @@ namespace Localiza.MerchantGuide.Domain.Services
             return index < values.Count - 1;
         }
 
-        private static int UpdateRepeatCount(List<string> values, int index, string current, int count)
+        private static int UpdateRepeatCount(List<string> values, int index, int count)
         {
             if (index > 0)
             {
