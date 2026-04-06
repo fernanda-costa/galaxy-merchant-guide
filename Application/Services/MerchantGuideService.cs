@@ -97,6 +97,9 @@ namespace Localiza.MerchantGuide.Application
             _intergalacticService.Add(_inputService.ReadInput("Valor de V:"), "V");
             _intergalacticService.Add(_inputService.ReadInput("Valor de X:"), "X");
             _intergalacticService.Add(_inputService.ReadInput("Valor de L:"), "L");
+            _intergalacticService.Add(_inputService.ReadInput("Valor de C:"), "C");
+            _intergalacticService.Add(_inputService.ReadInput("Valor de D:"), "D");
+            _intergalacticService.Add(_inputService.ReadInput("Valor de M:"), "M");
         }
 
         private void ReadMaterials()
