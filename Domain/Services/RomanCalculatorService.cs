@@ -105,6 +105,9 @@ namespace Localiza.MerchantGuide.Domain.Services
         {
             if (count > 3 && !mustSubtract)
                 throw new InvalidOperationException($"'{roman}' não pode repetir mais que 3 vezes");
+
+            if (count > 1 && (roman == "V" || roman == "D" || roman == "L"))
+                throw new InvalidOperationException($"'{roman}' não pode repetir");
         }
 
         private void ValidateSubtraction(string current, string next, int repeatCount)
