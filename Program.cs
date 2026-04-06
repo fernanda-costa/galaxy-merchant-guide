@@ -1,10 +1,21 @@
-﻿
+﻿using Localiza.MerchantGuide.Application;
+using Localiza.MerchantGuide.Application.Services;
+using Localiza.MerchantGuide.Domain.Services;
+using Localiza.MerchantGuide.Infraestructure;
+using Microsoft.Extensions.DependencyInjection;
 
+var services = new ServiceCollection();
 
-using Localiza.MerchantGuide;
+services.AddSingleton<IConsole, SystemConsole>();
 
-var console = new SystemConsole();  
-var service = new MerchantGuideService(console);
+services.AddSingleton<IntergalacticService>();
+services.AddSingleton<RomanCalculatorService>();
+services.AddSingleton<MaterialService>();
+services.AddSingleton<InputService>();
 
-service.Run();
+services.AddSingleton<MerchantGuideService>();
 
+var provider = services.BuildServiceProvider();
+
+var app = provider.GetRequiredService<MerchantGuideService>();
+app.Run();

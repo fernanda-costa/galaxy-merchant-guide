@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Localiza.MerchantGuide
+namespace Localiza.MerchantGuide.Infraestructure
 {
     public interface IConsole
     {

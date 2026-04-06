@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Localiza.MerchantGuide.Enums
+namespace Localiza.MerchantGuide.Domain.Enums
 {
     public enum MenuOptionsEnum
     {
