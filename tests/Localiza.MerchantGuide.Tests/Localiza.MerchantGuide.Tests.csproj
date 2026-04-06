@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Localiza.MerchantGuide\Localiza.MerchantGuide.csproj" />
+    <ProjectReference Include="..\..\src\Localiza.MerchantGuide.csproj" />
   </ItemGroup>
 
   <ItemGroup>
