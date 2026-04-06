@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+
+using Localiza.MerchantGuide;
+
+var console = new SystemConsole();  
+var service = new MerchantGuideService(console);
+
+service.Run();
+

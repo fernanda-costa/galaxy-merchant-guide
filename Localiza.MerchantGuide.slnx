@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../Localiza.MerchantGuide.Tests/Localiza.MerchantGuide.Tests.csproj" Id="b3ffd4a5-7344-4f2e-aec7-1ea3cb3d4533" />
   <Project Path="Localiza.MerchantGuide.csproj" />
 </Solution>
